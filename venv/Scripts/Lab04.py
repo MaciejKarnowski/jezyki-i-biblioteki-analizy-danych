@@ -1,6 +1,6 @@
 import collections
 
-patterns = ["abc", "aab", "cba"]
+patterns = ["abc", "aab", "cba","abca"]
 text = "aaabcab"
 
 AdjList = []
