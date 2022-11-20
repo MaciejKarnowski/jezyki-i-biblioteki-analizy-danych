@@ -1,21 +1,18 @@
 import collections
 
-patterns = ["abc", "aab", "cba","abca"]
+patterns = ["abc", "aab", "cba", "abca"]
 text = "aaabcab"
 
 AdjList = []
 
-
 def create_empty_trie():
     AdjList.append({'value': '', 'next_states': [], 'fail_state': 0, 'output': []})  # Tworzenie tablicy stanów
-
 
 def find_next_state(current_state, value):
     for node in AdjList[current_state]["next_states"]:
         if AdjList[node]["value"] == value:
             return node
     return None
-
 
 def add_keyword(patterns):
     current_state = 0
@@ -36,11 +33,9 @@ def add_keyword(patterns):
         current_state = len(AdjList) - 1
     AdjList[current_state]["output"].append(pattern)
 
-
 def add_keywords(patterns):
     for pattern in patterns:
         add_keyword(pattern)
-
 
 def set_fail_transitions():
     q = collections.deque()
@@ -60,12 +55,11 @@ def set_fail_transitions():
                 AdjList[child]["fail_state"] = 0
             AdjList[child]["output"] = AdjList[child]["output"] + AdjList[AdjList[child]["fail_state"]]["output"]
 
-
-def init_trie(patterns):  # Nasza funckja build, oczywiście można wrzucić caly kod zawarty w funkcjach, ale nie ma w tym sensu.
+def init_trie(
+              patterns):  # Nasza funckja build, oczywiście można wrzucić caly kod zawarty w funkcjach, ale nie ma w tym sensu.
     create_empty_trie()
     add_keywords(patterns)
     set_fail_transitions()
-
 
 def get_patterns_found(text):
     text = text.lower()
@@ -84,5 +78,16 @@ def get_patterns_found(text):
     return patterns_found
 
 
-init_trie(patterns)
-print(get_patterns_found(text))
+class AhoCorasick():
+    def __init__(self, patterns, text):
+        self.patterns=patterns
+        self.text=text
+        init_trie(self.patterns)
+
+    def __repr__(self):
+        rep = get_patterns_found(self.text)
+        return print(rep)
+
+
+algo=AhoCorasick(patterns,text)
+algo.__repr__()
