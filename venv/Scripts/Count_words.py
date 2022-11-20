@@ -2,12 +2,19 @@ from keras.preprocessing.text import Tokenizer
 from operator import itemgetter
 
 separators = ['\n', '`', '*', '_', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '$', ',']
+def text_to_list_words(text):
+
+    for sep in separators:
+        text = text.replace(sep, " ")
+    text = text.split(" ")
+    text = list(filter(None, text))
+    return text
 
 
 def count_words(file, n):  # file - filename, n - number of words to display
     with open(file, encoding="utf-8") as f:
-        text = f.read()
-    t = Tokenizer(filters=separators,lower=True,split=" ")
+        text = text_to_list_words(f.read())
+    t = Tokenizer(lower=True)
     t.fit_on_texts(text)
     word_list = sorted(t.word_counts.items(), key=itemgetter(1), reverse=True)
     while word_list[n][1] == word_list[n + 1][1]:  # działa, sprawdzone poprzez usunięcie reverse=True
