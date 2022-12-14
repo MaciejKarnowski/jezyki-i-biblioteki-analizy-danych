@@ -1,0 +1,6 @@
+Moby Dick;Herman Melville;0;reserved
+Pan Tadeusz;Adam Mickiewicz;0;0
+Quo Vadis;Henryk Sienkiewicz;0;0
+Krzy¿acy;Henryk Sienkiewicz;0;0
+Ogniem i mieczem;Henryk Sienkiewicz;0;0
+Potop;Henryk Sienkiewicz;0;0
